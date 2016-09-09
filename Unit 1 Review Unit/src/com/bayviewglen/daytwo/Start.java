@@ -78,7 +78,7 @@ public class Start extends AdressBook {
 		writer.print("");
 		writer.close();
 		for (Contact x : list) {
-			String output = x.getFname() + " " + x.getLname() + "  Number: " + x.getPhone();
+			String output = x.getFname() + " " + x.getLname() + " " + x.getPhone();
 			xyz.format("%s", output);
 		}
 		xyz.close();
