@@ -19,7 +19,7 @@ public class AdressBook extends Contact {
 	public static void listAll() {
 
 		for (Contact x : list) {
-			System.out.println(x.getFname() + " " + x.getLname() + "  Number: " + x.getPhone());
+			System.out.println(x.getFname() + " " + x.getLname() + " " + x.getPhone());
 		}
 	}
 
