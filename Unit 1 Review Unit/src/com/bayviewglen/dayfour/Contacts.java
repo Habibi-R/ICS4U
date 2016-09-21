@@ -1,6 +1,6 @@
 package com.bayviewglen.dayfour;
 
-public class Contact {
+public class Contacts {
 
 	private String lname;
 	private String fname;

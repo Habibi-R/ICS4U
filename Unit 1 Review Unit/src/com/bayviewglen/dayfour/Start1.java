@@ -3,8 +3,7 @@ package com.bayviewglen.dayfour;
 import java.io.*;
 import java.util.*;
 
-
-public class Start extends AdressBook {
+public class Start1 extends AdressBook {
 	static Formatter xyz;
 	static Scanner abc;
 
@@ -26,7 +25,7 @@ public class Start extends AdressBook {
 			String selection = input.nextLine();
 			if (selection.length() > 0 && selection.charAt(0) == '1') {
 
-				Contact newContact = new Contact();
+				Contacts newContact = new Contacts();
 				System.out.println("What is their first name?");
 				String name = input.nextLine();
 				newContact.setFname(name);
@@ -39,7 +38,7 @@ public class Start extends AdressBook {
 				String num = input.nextLine();
 				newContact.setPhone(num);
 				
-				addContact(newContact);
+				addContacts(newContact);
 				map.put(newContact.getFname() + " " + newContact.getLname(), list);
 				
 				System.out.println("Contact added!");
@@ -50,7 +49,7 @@ public class Start extends AdressBook {
 				System.out.println();
 
 			} else if (selection.length() > 0 && selection.charAt(0) == '3') {
-				System.out.println("Who do you want to search? Enter their phone number");
+				System.out.println("Who do you want to search?");
 				search();
 
 			} else if (selection.length() > 0 && selection.charAt(0) == '4') {
@@ -78,7 +77,7 @@ public class Start extends AdressBook {
 		PrintWriter writer = new PrintWriter("AddressBookSave.txt");
 		writer.print("");
 		writer.close();
-		for (Contact x : list) {
+		for (Contacts x : list) {
 			String output = x.getFname() + " " + x.getLname() + " " + x.getPhone();
 			xyz.format("%s", output);
 		}
@@ -100,11 +99,12 @@ public class Start extends AdressBook {
 			String last = abc.next();
 			String num = abc.next();
 			
-			Contact newContact = new Contact();
+			Contacts newContact = new Contacts();
 			newContact.setFname(first);
 			newContact.setLname(last);
 			newContact.setPhone(num);
-			addContact(newContact);
+			map.put(newContact.getFname() + " " + newContact.getLname(), list);
+			addContacts(newContact);
 		}
 	}
 	
