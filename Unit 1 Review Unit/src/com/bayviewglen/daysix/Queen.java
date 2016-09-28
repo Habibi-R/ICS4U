@@ -10,12 +10,6 @@ public class Queen {
 		col = 0;
 	}
 
-
-	public Queen(int x, int y) {
-		row = x;
-		col = y;
-	}
-
 	public int getRow() {
 		return row;
 	}
