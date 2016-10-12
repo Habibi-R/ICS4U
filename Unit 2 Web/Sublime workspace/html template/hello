@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="style/style.css">
+    <title></title>
+
+</head>
+
+<body>
+<p class="center"><img class="jays" src="http://vignette2.wikia.nocookie.net/mlbtheshow/images/0/00/Toronto_Blue_Jays_Logo.png/revision/latest?cb=20111229213620"></p>
+
+    <p class="red">Test</p>
+    <p id="p2">test</p>
+    <p class="red">test</p>
+</body>
+
+</html>
