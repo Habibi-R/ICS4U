@@ -1,12 +1,18 @@
 /*function difftime(finishTime, initialTime) {
 	var finishSeconds = parseInt(finishTime.split(':'))
 }
-
-function invalidInput(time) {
-	var time = document.getElementById("num1")[1].value;
-	if (type)
-}
 */
+
+function invalclassInput() {
+	var time = new Array();
+	time = document.querySelectorAll(".time");
+	console.log(time[0]);
+	
+	/*for(var i=0; i<time.length; i++){
+
+	}*/
+}
+
 function removeRunner(r) {
 		var i = r.parentNode.parentNode.rowIndex;
 	document.getElementById("table1").deleteRow(i);
@@ -14,9 +20,10 @@ function removeRunner(r) {
 
 }
 
-function removeRunner(r) {
+function addRunner(r) {
 		var i = r.parentNode.parentNode.rowIndex;
 	document.getElementById("table1").addRow(i);
-	var runnerNumOfTimes = document.getElementById("table1").rows.length;
+	
+	
 	
 }
