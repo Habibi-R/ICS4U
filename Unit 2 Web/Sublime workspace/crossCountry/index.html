@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Table Example</title>
+	<script src="js" type="text/javascript">
+	</script>
+	<style type="text/css">
+	      #table1 {
+	          width:70%;
+	          margin: 0% 10%; /*margin top/bottom left/right */
+	          border-radius: 2px;
+	          border: black 2px solid;
+	          padding-bottom: 30px;
+	      }
+	   #table1 th, td{
+	      text-align: center;
+	      line-height: 175%
+	   }
+	   #submit{
+	      text-align: center;
+	      background-color: #d5e0e8;
+	      font-color: white;
+	      cursor:pointer;
+	      border-radius: 20px;
+	      font-size: 50px;
+	      
+	   }
+	   #center{
+	      padding-top: 50px;
+	      padding-left: 500px;
+	   }
+	   .addButton{
+	   	 padding-left: 500px;
+	   }
+
+	      
+
+	   input[type = "text"]{
+	      background-color: inherit;
+	   }
+	</style>
+</head>
+<body>
+	<h1>Cross Country!</h1>
+
+	<table id="table1">
+		<tr>
+			<td><input name="remove" onclick="removeRunner(this)" type="button" value="x"></td>
+			<td><input class="name" onblur="invalclassInput()" placeholder="First Name" type="text"></td>
+			<td><input class="time1" onblur="invalclassInput()" placeholder="Time one" type="text"></td>
+			<td><input class="time2" onblur="invalclassInput()" placeholder="Time two" type="text"></td>
+			<td><input class="time3" onblur="invalclassInput()" placeholder="Time three" type="text"></td>
+			<td><input class="timeTotal" onblur="invalclassInput()" placeholder="Total time" type="text"></td>
+		</tr>
+		<tr>
+			<td><input name="remove" onclick="removeRunner(this)" type="button" value="x"></td>
+			<td><input class="name" onblur="invalclassInput()" placeholder="First Name" type="text"></td>
+			<td><input class="time1" onblur="invalclassInput()" placeholder="Time one" type="text"></td>
+			<td><input class="time2" onblur="invalclassInput()" placeholder="Time two" type="text"></td>
+			<td><input class="time3" onblur="invalclassInput()" placeholder="Time three" type="text"></td>
+			<td><input class="timeTotal" onblur="invalclassInput()" placeholder="Total time" type="text"></td>
+		</tr>
+		<tr>
+			<td><input name="remove" onclick="removeRunner(this)" type="button" value="x"></td>
+			<td><input class="name" onblur="invalclassInput()" placeholder="First Name" type="text"></td>
+			<td><input class="time1" onblur="invalclassInput()" placeholder="Time one" type="text"></td>
+			<td><input class="time2" onblur="invalclassInput()" placeholder="Time two" type="text"></td>
+			<td><input class="time3" onblur="invalclassInput()" placeholder="Time three" type="text"></td>
+			<td><input class="timeTotal" onblur="invalclassInput()" placeholder="Total time" type="text"></td>
+		</tr>
+		<tr>
+			<td><input name="remove" onclick="removeRunner(this)" type="button" value="x"></td>
+			<td><input class="name" onblur="invalclassInput()" placeholder="First Name" type="text"></td>
+			<td><input class="time1" onblur="invalclassInput()" placeholder="Time one" type="text"></td>
+			<td><input class="time2" onblur="invalclassInput()" placeholder="Time two" type="text"></td>
+			<td><input class="time3" onblur="invalclassInput()" placeholder="Time three" type="text"></td>
+			<td><input class="timeTotal" onblur="invalclassInput()" placeholder="Total time" type="text"></td>
+		</tr>
+		<tr>
+			<td><input name="remove" onclick="removeRunner(this)" type="button" value="x"></td>
+			<td><input class="name" onblur="invalclassInput()" placeholder="First Name" type="text"></td>
+			<td><input class="time1" onblur="invalclassInput()" placeholder="Time one" type="text"></td>
+			<td><input class="time2" onblur="invalclassInput()" placeholder="Time two" type="text"></td>
+			<td><input class="time3" onblur="invalclassInput()" placeholder="Time three" type="text"></td>
+			<td><input class="timeTotal" onblur="invalclassInput()" placeholder="Total time" type="text"></td>
+		</tr>
+		<td><input name="add" class= "addButton" onclick="addRunner(this)" type="button" value="Add"></td>
+	</table>
+
+	<div id="center">
+		<button id="submit">Submit Values</button>
+	</div>
+</body>
+</html>
