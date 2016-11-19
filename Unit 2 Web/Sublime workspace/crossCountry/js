@@ -20,10 +20,37 @@ function removeRunner(r) {
 
 }
 
-function addRunner(r) {
-		var i = r.parentNode.parentNode.rowIndex;
-	document.getElementById("table1").addRow(i);
-	
-	
-	
+function addRunner() {
+	var table = document.getElementById("table1");
+    var row = table.insertRow(1);
+
+    var numOfRunners = table.rows;
+    var idNumber = ++numOfRunners;
+   	row.id="idNumber";
+
+
+   	var removeRunnerButton = row.insertCell(0);
+    var fNameIn = row.insertCell(1);
+    var timeOneIn = row.insertCell(2);
+    var timeTwoIn = row.insertCell(3);	
+    var timeThreeIn = row.insertCell(4);
+    var totTimeIn = row.insertCell(5);
+    removeRunnerButton.innerHTML = ' <input name="remove" onclick="removeRunner(this)" type="button" value="x">   ';
+    fNameIn.innerHTML = ' <input class="name" id="NameR'+idNumber+' " onblur="invalclassInput(idNumber)" placeholder="First Name" type="text"> ';
+    timeOneIn.innerHTML = ' <input class="time" id="Time1'+idNumber+' " onblur="invalclassInput(idNumber)" placeholder="Time one" type="text"> ';
+    timeTwoIn.innerHTML = ' <input class="time" id="Time2'+idNumber+' " onblur="invalclassInput(idNumber)" placeholder="Time two" type="text"> ';
+    timeThreeIn.innerHTML = ' <input class="time" id="Time3'+idNumber+' " onblur="invalclassInput(idNumber)" placeholder="Time three" type="text"> ';
+    totTimeIn.innerHTML = ' <input class="time" id="Time4'+idNumber+' " onblur="invalclassInput(idNumber)"" placeholder="Total time" type="text">  ';
+
+}
+
+function calculations(whichRunner){
+var timeOne = document.getElementById("Time1R"+idNumber);
+var timeTwo = document.getElementById("Time2R"+idNumber);
+var timeThree = document.getElementById("Time3R"+idNumber);
+var timeTotal = document.getElementById("TimeTotR"+idNumber);
+
+var runner1FirstMIleMin = runner1FirstMile.split(":")[0];
+
+
 }
