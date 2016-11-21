@@ -1,16 +1,5 @@
-/*function difftime(finishTime, initialTime) {
-	var finishSeconds = parseInt(finishTime.split(':'))
-}
-*/
-
-function invalclassInput() {
-	var time = new Array();
-	time = document.querySelectorAll(".time");
-	console.log(time[0]);
-	
-	/*for(var i=0; i<time.length; i++){
-
-	}*/
+function invalclassInput(num) {
+calculations(num);
 }
 
 function removeRunner(r) {
@@ -32,25 +21,53 @@ function addRunner() {
    	var removeRunnerButton = row.insertCell(0);
     var fNameIn = row.insertCell(1);
     var timeOneIn = row.insertCell(2);
-    var timeTwoIn = row.insertCell(3);	
-    var timeThreeIn = row.insertCell(4);
-    var totTimeIn = row.insertCell(5);
+    var timeTwoIn = row.insertCell(3);
+    var splitTwoRow = row.insertCell(4);
+    var splitThreeRow = row.insertCell(5);
+    var totTimeIn = row.insertCell(6);
     removeRunnerButton.innerHTML = ' <input name="remove" onclick="removeRunner(this)" type="button" value="x">   ';
-    fNameIn.innerHTML = ' <input class="name" id="NameR'+idNumber+' " onblur="invalclassInput(idNumber)" placeholder="First Name" type="text"> ';
-    timeOneIn.innerHTML = ' <input class="time" id="Time1'+idNumber+' " onblur="invalclassInput(idNumber)" placeholder="Time one" type="text"> ';
-    timeTwoIn.innerHTML = ' <input class="time" id="Time2'+idNumber+' " onblur="invalclassInput(idNumber)" placeholder="Time two" type="text"> ';
-    timeThreeIn.innerHTML = ' <input class="time" id="Time3'+idNumber+' " onblur="invalclassInput(idNumber)" placeholder="Time three" type="text"> ';
-    totTimeIn.innerHTML = ' <input class="time" id="Time4'+idNumber+' " onblur="invalclassInput(idNumber)"" placeholder="Total time" type="text">  ';
+    fNameIn.innerHTML = ' <input class="name" id="NameR'+idNumber+'" onblur="invalclassInput(idNumber)" placeholder="First Name" type="text"> ';
+    timeOneIn.innerHTML = ' <input class="time" id="Time1R'+idNumber+'" onblur="invalclassInput(idNumber)" placeholder="Time one" type="text"> ';
+    timeTwoIn.innerHTML = ' <input class="time" id="Time2R'+idNumber+'" onblur="invalclassInput(idNumber)" placeholder="Time two" type="text"> ';
+    splitTwoRow.innerHTML= '<input class="results" id="Split2R'+idNumber+'" placeholder="Split Two" type="text" disabled>';
+	splitThreeRow.innerHTML = '<input class="results" id="Split3R'+idNumber+'" placeholder="Split Three" type="text" disabled>';
+    totTimeIn.innerHTML = ' <input class="time" id="Time4R'+idNumber+' " onblur="invalclassInput(idNumber)"" placeholder="Total time" type="text">  ';
 
 }
 
 function calculations(whichRunner){
-var timeOne = document.getElementById("Time1R"+idNumber);
-var timeTwo = document.getElementById("Time2R"+idNumber);
-var timeThree = document.getElementById("Time3R"+idNumber);
-var timeTotal = document.getElementById("TimeTotR"+idNumber);
+var table = document.getElementById("table1");
+var SEC_IN_MIN = 60;
+var timeOne = document.getElementById("Time1R"+whichRunner).value;
+var timeTwo = document.getElementById("Time2R"+whichRunner).value;
+var timeTotal = document.getElementById("TimeTotR"+whichRunner).value;
 
-var runner1FirstMIleMin = runner1FirstMile.split(":")[0];
+var FirstMIleMin = parseInt(timeOne.split(":")[0]);
+var FirstMileSec = parseFloat(timeOne.split(":")[1]);
+var FirstMTotalSec = SEC_IN_MIN * FirstMIleMin + FirstMileSec;
+	           
+var SecondMIleMin = parseInt(timeTwo.split(":")[0]);
+var SecondMileSec = parseFloat(timeTwo.split(":")[1]);								//takes inputs raw data for mile 2, converts for math. Splits based on min,sec
+var SecondMTotalSec = SEC_IN_MIN * SecondMIleMin + SecondMileSec;
+
+var TotalMIleMin = parseInt(timeTotal.split(":")[0]);
+var TotalMileSec = parseFloat(timeTotal.split(":")[1]);
+var TotalMTotalSec = SEC_IN_MIN * TotalMIleMin + TotalMileSec;
+
+var SplitTwo = SecondMTotalSec - FirstMTotalSec;
+var SplitTwoSecs = SplitTwo%SEC_IN_MIN;
+
+var SplitThree = TotalMTotalSec - SecondMTotalSec;
+var SplitThreeSecs = SplitThree%SEC_IN_MIN;    //this block calculates the splits based on total seconds. 
+
+var returnSplitTwo = parseInt(SplitTwo/SEC_IN_MIN)+":"+SplitTwoSecs;
+var returnSplitThree = parseInt(SplitThree/SEC_IN_MIN)+":"+SplitThreeSecs;
+
+var tableSplitTwo = document.querySelector("#Split2R" + whichRunner);
+tableSplitTwo.value = returnSplitTwo;
+
+var tableSplitThree = document.querySelector("#Split3R" + whichRunner); 
+tableSplitThree.value = returnSplitThree;
 
 
 }
