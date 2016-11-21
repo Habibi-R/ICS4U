@@ -14,7 +14,7 @@ function addRunner() {
     var row = table.insertRow(1);
 
     var numOfRunners = table.rows;
-    var idNumber = ++numOfRunners;
+    var idNumber = ++numOfRunners; 
    	row.id="idNumber";
 
 
@@ -60,8 +60,8 @@ var SplitTwoSecs = SplitTwo%SEC_IN_MIN;
 var SplitThree = TotalMTotalSec - SecondMTotalSec;
 var SplitThreeSecs = SplitThree%SEC_IN_MIN;    //this block calculates the splits based on total seconds. 
 
-var returnSplitTwo = parseInt(SplitTwo/SEC_IN_MIN)+":"+SplitTwoSecs;
-var returnSplitThree = parseInt(SplitThree/SEC_IN_MIN)+":"+SplitThreeSecs;
+var returnSplitTwo = "Split Two: "+(parseInt(SplitTwo/SEC_IN_MIN)+":"+SplitTwoSecs);
+var returnSplitThree = "Split Three: " + (parseInt(SplitThree/SEC_IN_MIN)+":"+SplitThreeSecs);
 
 var tableSplitTwo = document.querySelector("#Split2R" + whichRunner);
 tableSplitTwo.value = returnSplitTwo;
