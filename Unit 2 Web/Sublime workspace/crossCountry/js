@@ -9,13 +9,15 @@ function removeRunner(r) {
 
 }
 
+idNumber = 6;
 function addRunner() {
 	var table = document.getElementById("table1");
-    var row = table.insertRow(1);
-
-    var numOfRunners = table.rows;
-    var idNumber = ++numOfRunners; 
-   	row.id="idNumber";
+	//var numOfRunners = table.rows;
+   	// var idNumber = numOfRunners;
+     						
+   	
+    var row = table.insertRow(-1);
+    row.id=idNumber;
 
 
    	var removeRunnerButton = row.insertCell(0);
@@ -26,13 +28,13 @@ function addRunner() {
     var splitThreeRow = row.insertCell(5);
     var totTimeIn = row.insertCell(6);
     removeRunnerButton.innerHTML = ' <input name="remove" onclick="removeRunner(this)" type="button" value="x">   ';
-    fNameIn.innerHTML = ' <input class="name" id="NameR'+idNumber+'" onblur="invalclassInput(idNumber)" placeholder="First Name" type="text"> ';
-    timeOneIn.innerHTML = ' <input class="time" id="Time1R'+idNumber+'" onblur="invalclassInput(idNumber)" placeholder="Time one" type="text"> ';
-    timeTwoIn.innerHTML = ' <input class="time" id="Time2R'+idNumber+'" onblur="invalclassInput(idNumber)" placeholder="Time two" type="text"> ';
+    fNameIn.innerHTML = ' <input class="name" id="NameR'+idNumber+'" onblur="invalclassInput('+idNumber+')" placeholder="First Name" type="text"> ';
+    timeOneIn.innerHTML = ' <input class="time" id="Time1R'+idNumber+'" onblur="invalclassInput('+idNumber+')" placeholder="Time one" type="text"> ';
+    timeTwoIn.innerHTML = ' <input class="time" id="Time2R'+idNumber+'" onblur="invalclassInput('+idNumber+')" placeholder="Time two" type="text"> ';
     splitTwoRow.innerHTML= '<input class="results" id="Split2R'+idNumber+'" placeholder="Split Two" type="text" disabled>';
 	splitThreeRow.innerHTML = '<input class="results" id="Split3R'+idNumber+'" placeholder="Split Three" type="text" disabled>';
-    totTimeIn.innerHTML = ' <input class="time" id="Time4R'+idNumber+' " onblur="invalclassInput(idNumber)"" placeholder="Total time" type="text">  ';
-
+    totTimeIn.innerHTML = ' <input class="time" id="TimeTotR'+idNumber+'" onblur="invalclassInput('+idNumber+')" placeholder="Total time" type="text">  ';
+idNumber++;
 }
 
 function calculations(whichRunner){
@@ -52,7 +54,7 @@ var SecondMTotalSec = SEC_IN_MIN * SecondMIleMin + SecondMileSec;
 
 var TotalMIleMin = parseInt(timeTotal.split(":")[0]);
 var TotalMileSec = parseFloat(timeTotal.split(":")[1]);
-var TotalMTotalSec = SEC_IN_MIN * TotalMIleMin + TotalMileSec;
+var TotalMTotalSec = SEC_IN_MIN * TotalMIleMin + TotalMileSec;				
 
 var SplitTwo = SecondMTotalSec - FirstMTotalSec;
 var SplitTwoSecs = SplitTwo%SEC_IN_MIN;
@@ -60,8 +62,8 @@ var SplitTwoSecs = SplitTwo%SEC_IN_MIN;
 var SplitThree = TotalMTotalSec - SecondMTotalSec;
 var SplitThreeSecs = SplitThree%SEC_IN_MIN;    //this block calculates the splits based on total seconds. 
 
-var returnSplitTwo = "Split Two: "+(parseInt(SplitTwo/SEC_IN_MIN)+":"+SplitTwoSecs);
-var returnSplitThree = "Split Three: " + (parseInt(SplitThree/SEC_IN_MIN)+":"+SplitThreeSecs);
+var returnSplitTwo = "Split Two: "+(parseInt(SplitTwo/SEC_IN_MIN)+":"+SplitTwoSecs.toFixed(3));
+var returnSplitThree = "Split Three: " + (parseInt(SplitThree/SEC_IN_MIN)+":"+SplitThreeSecs.toFixed(3));
 
 var tableSplitTwo = document.querySelector("#Split2R" + whichRunner);
 tableSplitTwo.value = returnSplitTwo;
