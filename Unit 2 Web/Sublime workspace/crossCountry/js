@@ -1,34 +1,51 @@
-function invalclassInput(num) {
-calculations(num);
+function invalclassInput(whichRunner) {
+    var checkIfEmpty = /^\s*$/; //checks if time is empty to avoid unnecessary error messages
+    var checkFormat = /([0-5][0-9]|[0-9]):([0-5][0-9])(:|\.)\d{2}/ //regular expression for checking in format mm:ss.sss
+
+var table = document.getElementById("table1");
+var timeOne = document.getElementById("Time1R"+whichRunner).value;
+var timeTwo = document.getElementById("Time2R"+whichRunner).value; //retrieving input values
+var timeTotal = document.getElementById("TimeTotR"+whichRunner).value;
+
+if(!checkIfEmpty.test(timeOne) && !checkIfEmpty.test(timeTwo) && !checkIfEmpty.test(timeTotal)){ //doing test to see if textboxes are empty
+
+    if(!checkFormat.test(timeOne) || !checkFormat.test(timeTwo) || !checkFormat.test(timeTotal)){ //doing test for formatting
+        alert("Wrong Format! (mm:ss.sss)");
+        return;
+    }else{
+    calculations(whichRunner); //runs calculations once formatting has been checked
 }
 
-function removeRunner(r) {
-		var i = r.parentNode.parentNode.rowIndex;
-	document.getElementById("table1").deleteRow(i);
-	var runnerNumOfTimes = document.getElementById("table1").rows.length;
-
+}
 }
 
-idNumber = 6;
+function helpButton(){ //help button method displays instructions
+window.alert("Thank you for using the cross country split calculator. \n \n Please fill out all the times in a row in order to get splits.\n \n Times must be in minutes, seconds, mileseconds format. Ex: 3:55.222 \n");
+}
+
+function removeRunner(r) { //method asks to remove runner while keeping previous submissions in order
+    if(confirm("Are you sure you want to delete this runner?")){
+	var i = r.parentNode.parentNode.rowIndex;
+    document.getElementById("table1").deleteRow(i);
+    var runnerNumOfTimes = document.getElementById("table1").rows.length;
+    }
+}
+
+idNumber = 6; //initial starting num of rows
 function addRunner() {
 	var table = document.getElementById("table1");
-	//var numOfRunners = table.rows;
-   	// var idNumber = numOfRunners;
-     						
-   	
-    var row = table.insertRow(-1);
-    row.id=idNumber;
+    var row = table.insertRow(-1);  //inserts new row at bottom
+    row.id=idNumber;    //sets row id for finding which runner
 
-
-   	var removeRunnerButton = row.insertCell(0);
+   	var removeRunnerButton = row.insertCell(0); //inserts cells needed
     var fNameIn = row.insertCell(1);
     var timeOneIn = row.insertCell(2);
     var timeTwoIn = row.insertCell(3);
     var splitTwoRow = row.insertCell(4);
     var splitThreeRow = row.insertCell(5);
     var totTimeIn = row.insertCell(6);
-    removeRunnerButton.innerHTML = ' <input name="remove" onclick="removeRunner(this)" type="button" value="x">   ';
-    fNameIn.innerHTML = ' <input class="name" id="NameR'+idNumber+'" onblur="invalclassInput('+idNumber+')" placeholder="First Name" type="text"> ';
+    removeRunnerButton.innerHTML = ' <input name="remove" onclick="removeRunner(this)" type="button" value="x">';
+    fNameIn.innerHTML = ' <input class="name" id="NameR'+idNumber+'" placeholder="Name" type="text">'; //adds id number variable so that id numbers stay in order
     timeOneIn.innerHTML = ' <input class="time" id="Time1R'+idNumber+'" onblur="invalclassInput('+idNumber+')" placeholder="Time one" type="text"> ';
     timeTwoIn.innerHTML = ' <input class="time" id="Time2R'+idNumber+'" onblur="invalclassInput('+idNumber+')" placeholder="Time two" type="text"> ';
     splitTwoRow.innerHTML= '<input class="results" id="Split2R'+idNumber+'" placeholder="Split Two" type="text" disabled>';
@@ -37,7 +54,7 @@ function addRunner() {
 idNumber++;
 }
 
-function calculations(whichRunner){
+function calculations(whichRunner){     //calculations, same as last year
 var table = document.getElementById("table1");
 var SEC_IN_MIN = 60;
 var timeOne = document.getElementById("Time1R"+whichRunner).value;
@@ -49,7 +66,7 @@ var FirstMileSec = parseFloat(timeOne.split(":")[1]);
 var FirstMTotalSec = SEC_IN_MIN * FirstMIleMin + FirstMileSec;
 	           
 var SecondMIleMin = parseInt(timeTwo.split(":")[0]);
-var SecondMileSec = parseFloat(timeTwo.split(":")[1]);								//takes inputs raw data for mile 2, converts for math. Splits based on min,sec
+var SecondMileSec = parseFloat(timeTwo.split(":")[1]);	//takes inputs raw data for mile 2, converts for math. Splits based on min,sec
 var SecondMTotalSec = SEC_IN_MIN * SecondMIleMin + SecondMileSec;
 
 var TotalMIleMin = parseInt(timeTotal.split(":")[0]);
@@ -58,18 +75,25 @@ var TotalMTotalSec = SEC_IN_MIN * TotalMIleMin + TotalMileSec;
 
 var SplitTwo = SecondMTotalSec - FirstMTotalSec;
 var SplitTwoSecs = SplitTwo%SEC_IN_MIN;
-
 var SplitThree = TotalMTotalSec - SecondMTotalSec;
 var SplitThreeSecs = SplitThree%SEC_IN_MIN;    //this block calculates the splits based on total seconds. 
 
-var returnSplitTwo = "Split Two: "+(parseInt(SplitTwo/SEC_IN_MIN)+":"+SplitTwoSecs.toFixed(3));
-var returnSplitThree = "Split Three: " + (parseInt(SplitThree/SEC_IN_MIN)+":"+SplitThreeSecs.toFixed(3));
+var splitTwoSecsFinal = SplitTwoSecs.toFixed(3);
+var splitThreeSecsFinal = SplitThreeSecs.toFixed(3);
 
-var tableSplitTwo = document.querySelector("#Split2R" + whichRunner);
-tableSplitTwo.value = returnSplitTwo;
+if(splitTwoSecsFinal.split(".")[0].length ==1){  //Fixes formatting for single digit seconds, adds extra 0
+    splitTwoSecsFinal = "0" + splitTwoSecsFinal.split(".")[0]+ ".000";
+}
+if(splitThreeSecsFinal.split(".")[0].length ==1){
+    splitThreeSecsFinal = "0" + splitTwoSecsFinal.split(".")[0]+ ".000";
+}  
+
+var returnSplitTwo = "Split Two: "+ (parseInt(SplitTwo/SEC_IN_MIN))+":"+splitTwoSecsFinal;//sets up final return strings, finishes minute conversion
+var returnSplitThree = "Split Three: " + (parseInt(SplitThree/SEC_IN_MIN))+":"+splitThreeSecsFinal;
+
+var tableSplitTwo = document.querySelector("#Split2R" + whichRunner); 
+tableSplitTwo.value = returnSplitTwo; //sets as value for text box
 
 var tableSplitThree = document.querySelector("#Split3R" + whichRunner); 
 tableSplitThree.value = returnSplitThree;
-
-
 }
