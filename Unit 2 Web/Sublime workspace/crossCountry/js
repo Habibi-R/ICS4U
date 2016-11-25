@@ -7,17 +7,59 @@ var timeOne = document.getElementById("Time1R"+whichRunner).value;
 var timeTwo = document.getElementById("Time2R"+whichRunner).value; //retrieving input values
 var timeTotal = document.getElementById("TimeTotR"+whichRunner).value;
 
-if(!checkIfEmpty.test(timeOne) && !checkIfEmpty.test(timeTwo) && !checkIfEmpty.test(timeTotal)){ //doing test to see if textboxes are empty
+/*if(!checkIfEmpty.test(timeOne) && !checkIfEmpty.test(timeTwo) && !checkIfEmpty.test(timeTotal)){ //doing test to see if textboxes are empty
 
     if(!checkFormat.test(timeOne) || !checkFormat.test(timeTwo) || !checkFormat.test(timeTotal)){ //doing test for formatting
         alert("Wrong Format! (mm:ss.sss)");
         return;
     }else{
     calculations(whichRunner); //runs calculations once formatting has been checked
+}*/
+
+var T1 = false;
+var T2 = false;
+var Ttot = false;
+
+if(!checkIfEmpty.test(timeOne) && !checkFormat.test(timeOne)){
+	alert("Wrong Format! (mm:ss.sss)");
+document.getElementById("Time1R"+whichRunner).focus();
+	while(T1){
+		if(!checkIfEmpty.test(timeOne) && checkFormat.test(timeOne)){
+			T1 = true;
+		}
+	}
+}else if(!checkIfEmpty.test(timeOne)&& checkFormat.test(timeOne)){
+	T1 = true;
+}
+if(!checkIfEmpty.test(timeTwo) && !checkFormat.test(timeTwo)){
+	alert("Wrong Format! (mm:ss.sss)");
+			document.getElementById("Time2R"+whichRunner).focus();
+	while(T2){
+		if(!checkIfEmpty.test(timeTwo) && checkFormat.test(timeTwo)){
+			T2 = true;
+		}
+	}
+}else if(!checkIfEmpty.test(timeTwo) && checkFormat.test(timeTwo)){
+	T2 = true;
 }
 
+if(!checkIfEmpty.test(timeTotal) && !checkFormat.test(timeTotal)){
+	alert("Wrong Format! (mm:ss.sss)");
+	document.getElementById("TimeTotR"+whichRunner).focus();
+	while(Ttot){
+			
+			if(!checkIfEmpty.test(timeTotal) && checkFormat.test(timeTotal)){
+			Ttot = true;
+		}
+	}
+}else if(!checkIfEmpty.test(timeTotal) && checkFormat.test(timeTotal)){
+	 Ttot= true;
 }
+
+if(T1 && T2 && Ttot){
+	calculations(whichRunner);
 }
+}	
 
 function helpButton(){ //help button method displays instructions
 window.alert("Thank you for using the cross country split calculator. \n \n Please fill out all the times in a row in order to get splits.\n \n Times must be in minutes, seconds, mileseconds format. Ex: 3:55.222 \n");
