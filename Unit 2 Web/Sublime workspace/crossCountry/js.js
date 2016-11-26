@@ -1,70 +1,58 @@
 function invalclassInput(whichRunner) {
     var checkIfEmpty = /^\s*$/; //checks if time is empty to avoid unnecessary error messages
-    var checkFormat = /([0-5][0-9]|[0-9]):([0-5][0-9])(:|\.)\d{2}/ //regular expression for checking in format mm:ss.sss
+    var checkFormat = /^([0-5][0-9]|[0-9]):([0-5][0-9])(:|\.)\d{3}$/ //regular expression for checking in format mm:ss.sss
 
 var table = document.getElementById("table1");
 var timeOne = document.getElementById("Time1R"+whichRunner).value;
 var timeTwo = document.getElementById("Time2R"+whichRunner).value; //retrieving input values
 var timeTotal = document.getElementById("TimeTotR"+whichRunner).value;
-
-/*if(!checkIfEmpty.test(timeOne) && !checkIfEmpty.test(timeTwo) && !checkIfEmpty.test(timeTotal)){ //doing test to see if textboxes are empty
-
-    if(!checkFormat.test(timeOne) || !checkFormat.test(timeTwo) || !checkFormat.test(timeTotal)){ //doing test for formatting
-        alert("Wrong Format! (mm:ss.sss)");
-        return;
-    }else{
-    calculations(whichRunner); //runs calculations once formatting has been checked
-}*/
-
 var T1 = false;
-var T2 = false;
+var T2 = false; //Time booleans, turn true if correct format
 var Ttot = false;
+var error = false; //error boolean, turn true if error alert should be shown
 
-if(!checkIfEmpty.test(timeOne) && !checkFormat.test(timeOne)){
-	alert("Wrong Format! (mm:ss.sss)");
-document.getElementById("Time1R"+whichRunner).focus();
-	while(T1){
-		if(!checkIfEmpty.test(timeOne) && checkFormat.test(timeOne)){
-			T1 = true;
-		}
-	}
-}else if(!checkIfEmpty.test(timeOne)&& checkFormat.test(timeOne)){
+if(!checkIfEmpty.test(timeOne) && !checkFormat.test(timeOne)){//First check to see if incorrect format AND not empty
+    document.getElementById("Time1R"+whichRunner).style.border = "solid 6px red"; //sets border red if error exists
+    error = true; //turns true for alert to show up
+    document.getElementById("Time1R"+whichRunner).blur();//blurs to avoid accidental resubmission, occasionally causes alert spam if not done
+}else if(!checkIfEmpty.test(timeOne)&& checkFormat.test(timeOne)){ //Second check if format is correct AND not empty
+    document.getElementById("Time1R"+whichRunner).style.border = "solid 1px orange"; //sets border to normal if error was fixed
 	T1 = true;
+    error = false;
 }
-if(!checkIfEmpty.test(timeTwo) && !checkFormat.test(timeTwo)){
-	alert("Wrong Format! (mm:ss.sss)");
-			document.getElementById("Time2R"+whichRunner).focus();
-	while(T2){
-		if(!checkIfEmpty.test(timeTwo) && checkFormat.test(timeTwo)){
-			T2 = true;
-		}
-	}
-}else if(!checkIfEmpty.test(timeTwo) && checkFormat.test(timeTwo)){
+
+if(!checkIfEmpty.test(timeTwo) && !checkFormat.test(timeTwo)){//First check to see if incorrect format AND not empty
+    document.getElementById("Time2R"+whichRunner).style.border = "solid 6px red"; //sets border red if error exists
+    error = true;//turns true for alert to show up 
+    document.getElementById("Time2R"+whichRunner).blur();//blurs to avoid accidental resubmission, occasionally causes alert spam if not done
+}else if(!checkIfEmpty.test(timeTwo) && checkFormat.test(timeTwo)){//Second check if format is correct AND not empty
+    document.getElementById("Time2R"+whichRunner).style.border = "solid 1px orange"; //sets border to normal if error was fixed
 	T2 = true;
+    error = false;
 }
 
-if(!checkIfEmpty.test(timeTotal) && !checkFormat.test(timeTotal)){
-	alert("Wrong Format! (mm:ss.sss)");
-	document.getElementById("TimeTotR"+whichRunner).focus();
-	while(Ttot){
-			
-			if(!checkIfEmpty.test(timeTotal) && checkFormat.test(timeTotal)){
-			Ttot = true;
-		}
-	}
-}else if(!checkIfEmpty.test(timeTotal) && checkFormat.test(timeTotal)){
-	 Ttot= true;
+if(!checkIfEmpty.test(timeTotal) && !checkFormat.test(timeTotal)){//First check to see if incorrect format AND not empty
+    document.getElementById("TimeTotR"+whichRunner).style.border = "solid 6px red"; //sets border red if error exists
+    error = true;//turns true for alert to show up 
+}else if(!checkIfEmpty.test(timeTotal) && checkFormat.test(timeTotal)){//Second check if format is correct AND not empty
+	Ttot= true;
+    error = false;
+    document.getElementById("TimeTotR"+whichRunner).blur();//blurs to avoid accidental resubmission, occasionally causes alert spam if not done 
+    document.getElementById("TimeTotR"+whichRunner).style.border = "solid 1px orange"; //sets border to normal if error was fixed
 }
-
-if(T1 && T2 && Ttot){
+    if(error){ //Sends one error message if one or more errors exist in table
+    alert("Wrong Format! (mm:ss.sss)");
+}
+    if(T1 && T2 && Ttot){ //If all true (good format), carry on with calculations
 	calculations(whichRunner);
 }
 }	
 
-function helpButton(){ //help button method displays instructions
+function helpButton(){ //help button, displays instructions
 window.alert("Thank you for using the cross country split calculator. \n \n Please fill out all the times in a row in order to get splits.\n \n Times must be in minutes, seconds, mileseconds format. Ex: 3:55.222 \n");
 }
 
+var idNumber = 6; //initial starting num of rows
 function removeRunner(r) { //method asks to remove runner while keeping previous submissions in order
     if(confirm("Are you sure you want to delete this runner?")){
 	var i = r.parentNode.parentNode.rowIndex;
@@ -73,7 +61,7 @@ function removeRunner(r) { //method asks to remove runner while keeping previous
     }
 }
 
-idNumber = 6; //initial starting num of rows
+
 function addRunner() {
 	var table = document.getElementById("table1");
     var row = table.insertRow(-1);  //inserts new row at bottom
@@ -93,12 +81,12 @@ function addRunner() {
     splitTwoRow.innerHTML= '<input class="results" id="Split2R'+idNumber+'" placeholder="Split Two" type="text" disabled>';
 	splitThreeRow.innerHTML = '<input class="results" id="Split3R'+idNumber+'" placeholder="Split Three" type="text" disabled>';
     totTimeIn.innerHTML = ' <input class="time" id="TimeTotR'+idNumber+'" onblur="invalclassInput('+idNumber+')" placeholder="Total time" type="text">  ';
-idNumber++;
+idNumber++; //increments global variable once a new runner added so that next ids are accurate and unique
 }
 
 function calculations(whichRunner){     //calculations, same as last year
 var table = document.getElementById("table1");
-var SEC_IN_MIN = 60;
+var SEC_IN_MIN = 60; //because magic numbers are evil
 var timeOne = document.getElementById("Time1R"+whichRunner).value;
 var timeTwo = document.getElementById("Time2R"+whichRunner).value;
 var timeTotal = document.getElementById("TimeTotR"+whichRunner).value;

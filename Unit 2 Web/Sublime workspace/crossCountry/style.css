@@ -15,9 +15,10 @@ h1 {
 }
 body {
 	background-image: url(images/background.jpg);
-	background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%), url(images/background.jpg);
+	background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%), url(images/background.jpg); /*Adds dark layer on background*/
 }
-input[type="text"] {
+
+.name, .time {
 	background-color: white;
 	border-radius: 500px;
 	border: solid 1px orange;
@@ -33,4 +34,11 @@ input[type="button"] {
 	border: 4px;
 	font-size: 13px;
 	padding: 5px;
+}
+
+.results {
+	background-color: #dbdbdb;
+	border-radius: 500px;
+	border: solid 1px orange;
+	padding: 5px 0px 5px 5px;
 }
