@@ -1,6 +1,6 @@
 package com.bayviewglen.daythree;
-
 public class BinaryNode {
+	
 	private BinaryNode leftChild; 
 	private BinaryNode rightChild;
 	private int element;
@@ -29,7 +29,4 @@ public class BinaryNode {
 	public void setElement(int element) {
 		this.element = element;
 	}
-	
-	
-	
 }
