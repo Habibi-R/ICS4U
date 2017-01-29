@@ -3,7 +3,7 @@ public class BinarySearchTree {
 	BinaryNode root;
 	
 	 public void insert(int key){ //first step in inserting, calls private
-		 						  //recursive method with two inputs later
+		 						//recursive method with two inputs later
 		BinaryNode node  = new BinaryNode(key);
 		if(root==null){ //if no root, adds as first node
 			root = node;
@@ -13,14 +13,14 @@ public class BinarySearchTree {
 	}
 	 
 	private void add(BinaryNode parent, BinaryNode x){ //recursive function, takes in 
-													   //parent/root and x is what added node	
-		if(x.getElement()<parent.getElement()){
+													 //parent/root and x is what added node	
+		if(x.getElement().compareTo(parent.getElement())<=0){
 			if(parent.getLeftChild() != null){
 			add(parent.getLeftChild(), x);
 			}else{
 				parent.setLeftChild(x);
 			}
-		}else if(x.getElement()>parent.getElement()){
+		}else if(x.getElement().compareTo(parent.getElement())>=0){
 			if(parent.getRightChild() != null){
 			add(parent.getRightChild(), x);
 			}else{

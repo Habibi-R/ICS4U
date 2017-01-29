@@ -3,9 +3,9 @@ public class BinaryNode {
 	
 	private BinaryNode leftChild; 
 	private BinaryNode rightChild;
-	private int element;
+	private Comparable element;
 
-	public BinaryNode(int key){
+	public BinaryNode(Comparable key){
 		this.setElement(key);
 		leftChild = null;
 		rightChild = null;
@@ -23,10 +23,10 @@ public class BinaryNode {
 	public void setRightChild(BinaryNode rightChild) {
 		this.rightChild = rightChild;
 	}
-	public int getElement() {
+	public Comparable getElement() {
 		return element;
 	}
-	public void setElement(int element) {
+	public void setElement(Comparable element) {
 		this.element = element;
 	}
 }
