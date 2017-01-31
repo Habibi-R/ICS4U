@@ -33,7 +33,32 @@ public class BinarySearchTree {
 		
 	}
 	
-	//might not work
+	public BinaryNode find(int findThis){
+		
+		if(root != null){
+			BinaryNode node = new BinaryNode(findThis);
+			return find(root,node);
+		}else
+			return null;
+	}
+	
+	private BinaryNode find(BinaryNode parent, BinaryNode x){
+		
+		if(parent != null){
+			if(parent.getElement() == x.getElement()){
+				return parent;
+			}else{
+				BinaryNode findInTree = find(parent.getLeftChild(), x);
+				
+				if(findInTree == null){
+					findInTree = find(parent.getRightChild(), x);
+				}
+				return findInTree;
+			}
+		}
+			return null;
+	}
+	
 	public void preOrder(BinaryNode root){
 		//ProcessNode(root.getElement());
 		System.out.println(root.getElement());

@@ -12,6 +12,6 @@ public class Run {
 		tree.insert(15);
 		tree.insert(4);
 		tree.insert(3);
-		tree.inOrder(tree.root);
+		tree.preOrder(tree.root);
 	}
 }
