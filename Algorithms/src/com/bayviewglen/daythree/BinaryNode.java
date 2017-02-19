@@ -1,4 +1,7 @@
 package com.bayviewglen.daythree;
+
+import com.bayviewglen.contact.Contact;
+
 public class BinaryNode {
 	
 	private BinaryNode leftChild; 

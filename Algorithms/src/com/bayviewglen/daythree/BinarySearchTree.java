@@ -98,10 +98,10 @@ private void removeSpecialCase(Comparable el, BinaryNode node) {
 }
 
 	
-	public BinaryNode find(int findThis){
+	public BinaryNode find(Comparable search){
 		
 		if(root != null){
-			BinaryNode node = new BinaryNode(findThis);
+			BinaryNode node = new BinaryNode(search);
 			return find(root,node);
 		}else
 			return null;

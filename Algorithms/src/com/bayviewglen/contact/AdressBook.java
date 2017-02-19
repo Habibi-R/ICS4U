@@ -1,57 +1,53 @@
 package com.bayviewglen.contact;
 
 import java.util.ArrayList;
+import java.util.Formatter;
 import java.util.Scanner;
 
-import com.bayviewglen.daythree.BinarySearchTree;
 
-public class AdressBook extends Contact {
+public class AdressBook {
 
 	static Scanner input = new Scanner(System.in);
 
-	static //static ArrayList<Contact> list = new ArrayList<Contact>();
-
-	BinarySearchTree tree = new BinarySearchTree();
+	 //static ArrayList<Contact> list = new ArrayList<Contact>();
+	
+	static BinarySearchTree tree = new BinarySearchTree();
 	
 	
 	// rest of the code
 
 	public static void addContact(Contact ContactNew) {
-		tree.insert((java.lang.Comparable) ContactNew);
+		tree.insert(ContactNew);
 
 	}
 
 	public static void listAll() {
-
-		tree.inOrder(tree.root);
+		
+		if(tree.root!=null){
+			tree.DisplayAll(tree.root);
+		}else{
+			System.out.println("Phonebook is empty");
+		}
+		
 	}
 
 	public static void search() {
-
+		
+		Contact searchContact = new Contact();
 		String search = input.nextLine();
-		boolean found = false;
+		searchContact.setLname(search);
 		Contact rememberWhichContact = null;
-
-		for (Contact x : list) {
-			if (x.getFname().equalsIgnoreCase(search)) {
-				found = true;
-				rememberWhichContact = x;
-			} else if (x.getLname().equalsIgnoreCase(search)) {
-				found = true;
-				rememberWhichContact = x;
-			} else if (x.getPhone().equalsIgnoreCase(search)) {
-				found = true;
-				rememberWhichContact = x;
-			} else {
-				System.out.println("Not found");
-			}
-
+		try {
+			rememberWhichContact = (Contact) tree.find(searchContact).getElement();
+		} catch (Exception e) {
+			System.out.println("Not Found");
 		}
-		if (found == true) {
+		
+		if (rememberWhichContact != null) {
 			System.out.println("Your contact was found!");
-			System.out.println("First Name:" + rememberWhichContact.getFname());
-			System.out.println("Last Name:" + rememberWhichContact.getLname());
-			System.out.println("Phone:" + rememberWhichContact.getPhone());
+			System.out.println("First Name: " + rememberWhichContact.getFname());
+			System.out.println("Last Name: " + rememberWhichContact.getLname());
+			System.out.println("Phone: " + rememberWhichContact.getPhone());
 		}
 
 	}

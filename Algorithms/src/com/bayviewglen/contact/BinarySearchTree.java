@@ -1,8 +1,14 @@
 package com.bayviewglen.contact;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.Formatter;
+
 public class BinarySearchTree {
 	public static BinaryNode root;
+	static Formatter xyz;
 	
-	 public void insert(Comparable key){ //first step in inserting, calls private
+	 public void insert(Contact key){ //first step in inserting, calls private
 		 						//recursive method with two inputs later
 		BinaryNode node  = new BinaryNode(key);
 		if(root==null){ //if no root, adds as first node
@@ -10,7 +16,7 @@ public class BinarySearchTree {
 		}else{
 			add(root,node);
 		}
-	}
+	 }
 	 
 	private void add(BinaryNode parent, BinaryNode x){ //recursive function, takes in 
 													 //parent/root and x is what added node	
@@ -98,7 +104,7 @@ private void removeSpecialCase(Comparable el, BinaryNode node) {
 }
 
 	
-	public BinaryNode find(Comparable findThis){
+	public BinaryNode find(Contact findThis){
 		
 		if(root != null){
 			BinaryNode node = new BinaryNode(findThis);
@@ -110,7 +116,7 @@ private void removeSpecialCase(Comparable el, BinaryNode node) {
 	private BinaryNode find(BinaryNode parent, BinaryNode x){
 		
 		if(parent != null){
-			if(parent.getElement() == x.getElement()){
+			if(((Contact) parent.getElement()).getLname().equals(((Contact) x.getElement()).getLname()) ){
 				return parent;
 			}else{
 				BinaryNode findInTree = find(parent.getLeftChild(), x);
@@ -133,16 +139,39 @@ private void removeSpecialCase(Comparable el, BinaryNode node) {
 		if(root.getRightChild() !=null){
 			preOrder(root.getRightChild());
 		}
-	}
-	public void inOrder(BinaryNode root){
+	}	
+	public void DisplayAll(BinaryNode root){
 		//ProcessNode(root.getElement());
 		if(root.getLeftChild()!=null){
-			inOrder(root.getLeftChild());
+			DisplayAll(root.getLeftChild());
+		}
+		System.out.println(((Contact) root.getElement()).getFname() + " " + ((Contact) root.getElement()).getLname() + " " + ((Contact) root.getElement()).getPhone());
+		if(root.getRightChild() !=null){
+			DisplayAll(root.getRightChild());
+		}
+	}
+	
+	public void WriteIt(BinaryNode root) throws FileNotFoundException{
+		//ProcessNode(root.getElement());
+		try {
+			xyz =  new Formatter("AddressBookSave.txt");
+		} catch (Exception e) {
+			System.out.println("Error in opening file!!");
+		}
+		PrintWriter writer = new PrintWriter("AddressBookSave.txt");
+		writer.print("");
+		writer.close();
+		if(root.getLeftChild()!=null){
+			WriteIt(root.getLeftChild());
 		}
 		System.out.println(root.getElement());
+		String output = ((Contact) root.getElement()).getFname() + " " + ((Contact) root.getElement()).getLname() + " " + ((Contact) root.getElement()).getPhone();
+		xyz.format("%s", output);
+		
 		if(root.getRightChild() !=null){
-			inOrder(root.getRightChild());
+			WriteIt(root.getRightChild());
 		}
+		xyz.close();
 	}
 	public void postOrder(BinaryNode root){
 		//ProcessNode(root.getElement());

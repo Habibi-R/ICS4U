@@ -49,7 +49,7 @@ public class Start extends AdressBook {
 				System.out.println();
 
 			} else if (selection.length() > 0 && selection.charAt(0) == '3') {
-				System.out.println("Who do you want to search? Enter either first name, last name, or phone number");
+				System.out.println("Who do you want to search? Enter their last name to look up in phonebook!");
 				search();
 
 			} else if (selection.length() > 0 && selection.charAt(0) == '4') {
@@ -73,7 +73,7 @@ public class Start extends AdressBook {
 		}
 	}
 
-	public static void writeToFile() throws FileNotFoundException{
+	/*public static void writeToFile() throws FileNotFoundException{
 		PrintWriter writer = new PrintWriter("AddressBookSave.txt");
 		writer.print("");
 		writer.close();
@@ -82,10 +82,13 @@ public class Start extends AdressBook {
 			xyz.format("%s", output);
 		}
 		xyz.close();
-	}
+	}*/
 	
+	public static void writeToFile() throws FileNotFoundException{
+		tree.WriteIt(tree.root);
+	}
 	public static void findFileForRead(){
-		
+	
 		try {
 			abc =  new Scanner(new File("AddressBookSave.txt"));
 		} catch (Exception e) {
