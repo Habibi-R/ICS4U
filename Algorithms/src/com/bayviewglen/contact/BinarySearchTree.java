@@ -165,13 +165,13 @@ private void removeSpecialCase(Comparable el, BinaryNode node) {
 			WriteIt(root.getLeftChild());
 		}
 		System.out.println(root.getElement());
-		String output = ((Contact) root.getElement()).getFname() + " " + ((Contact) root.getElement()).getLname() + " " + ((Contact) root.getElement()).getPhone();
+		String output = ((Contact) root.getElement()).getFname() + " " + ((Contact) root.getElement()).getLname() + " " + ((Contact) root.getElement()).getPhone() + " ";
 		xyz.format("%s", output);
 		
 		if(root.getRightChild() !=null){
 			WriteIt(root.getRightChild());
 		}
-		xyz.close();
+		
 	}
 	public void postOrder(BinaryNode root){
 		//ProcessNode(root.getElement());

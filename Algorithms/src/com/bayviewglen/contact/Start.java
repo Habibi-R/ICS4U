@@ -86,6 +86,7 @@ public class Start extends AdressBook {
 	
 	public static void writeToFile() throws FileNotFoundException{
 		tree.WriteIt(tree.root);
+		tree.xyz.close();
 	}
 	public static void findFileForRead(){
 	
