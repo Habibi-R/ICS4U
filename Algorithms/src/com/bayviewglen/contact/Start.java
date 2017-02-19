@@ -1,4 +1,4 @@
-package com.bayviewglen.daytwo;
+package com.bayviewglen.contact;
 
 import java.io.*;
 import java.util.*;

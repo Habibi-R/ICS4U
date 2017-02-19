@@ -1,6 +1,6 @@
-package com.bayviewglen.daythree;
+package com.bayviewglen.contact;
 public class BinarySearchTree {
-	public BinaryNode root;
+	public static BinaryNode root;
 	
 	 public void insert(Comparable key){ //first step in inserting, calls private
 		 						//recursive method with two inputs later
@@ -98,7 +98,7 @@ private void removeSpecialCase(Comparable el, BinaryNode node) {
 }
 
 	
-	public BinaryNode find(int findThis){
+	public BinaryNode find(Comparable findThis){
 		
 		if(root != null){
 			BinaryNode node = new BinaryNode(findThis);
