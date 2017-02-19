@@ -1,6 +1,4 @@
-package com.bayviewglen.daythree;
-
-import com.bayviewglen.contact.Contact;
+package com.bayviewglen.BST;
 
 public class BinaryNode {
 	
